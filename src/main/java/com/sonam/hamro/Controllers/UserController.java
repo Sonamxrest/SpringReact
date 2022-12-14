@@ -1,7 +1,9 @@
 package com.sonam.hamro.Controllers;
 
+import com.sonam.hamro.Service.RefreshTokenService;
 import com.sonam.hamro.Service.UserService;
 import com.sonam.hamro.config.JWTUtils;
+import com.sonam.hamro.models.RefreshToken;
 import com.sonam.hamro.models.User;
 import com.sonam.hamro.persitDto.UserPersitDto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +31,9 @@ public class UserController {
     @Autowired
     private PasswordEncoder encoder;
 
+    @Autowired
+    private RefreshTokenService refreshTokenService;
+
 
     @PostMapping("/save")
     public ResponseEntity<?> save(@RequestBody UserPersitDto userPersitDto) {
@@ -55,10 +60,12 @@ public class UserController {
         if (encoder.matches(customer.get("password"), customer1.getPassword())) {
             UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(customer1, customer.get("username"), customer1.getAuthorities());
             SecurityContextHolder.getContext().setAuthentication(authenticationManager.authenticate(authenticationToken));
+            RefreshToken refreshToken = refreshTokenService.generateRefreshToken(customer1);
             Map<String, Object> map = new HashMap<>();
             map.put("token", JWTUtils.encode(customer.get("username")));
             map.put("id", customer1.getId());
             map.put("username", customer1.getUsername());
+            map.put("refresh_token", refreshToken.getToken());
             return new ResponseEntity<>(map, HttpStatus.OK);
         }
         return new ResponseEntity(HttpStatus.BAD_REQUEST);
