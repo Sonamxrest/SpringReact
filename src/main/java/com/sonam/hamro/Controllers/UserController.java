@@ -15,6 +15,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.Instant;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -62,13 +63,27 @@ public class UserController {
             SecurityContextHolder.getContext().setAuthentication(authenticationManager.authenticate(authenticationToken));
             RefreshToken refreshToken = refreshTokenService.generateRefreshToken(customer1);
             Map<String, Object> map = new HashMap<>();
-            map.put("token", JWTUtils.encode(customer.get("username")));
+            map.put("access_token", JWTUtils.encode(customer.get("username")));
             map.put("id", customer1.getId());
             map.put("username", customer1.getUsername());
             map.put("refresh_token", refreshToken.getToken());
             return new ResponseEntity<>(map, HttpStatus.OK);
         }
         return new ResponseEntity(HttpStatus.BAD_REQUEST);
+    }
+
+    @GetMapping("/refresh/{token}")
+    public ResponseEntity<?> getAccessToken(@PathVariable("token") String token) {
+        RefreshToken refreshToken = refreshTokenService.getRefreshTokenFromToken(token);
+        if (refreshToken.getExpiration().isAfter(Instant.now())) {
+            refreshToken = refreshTokenService.generateRefreshToken(refreshToken.getUser());
+            Map map = new HashMap();
+            map.put("refresh_token", refreshToken.getToken());
+            map.put("access_token", JWTUtils.encode(refreshToken.getUser().getUsername()));
+            return new ResponseEntity<>(map, HttpStatus.OK);
+        } else {
+            return new ResponseEntity("Please Login For New Access Token", HttpStatus.UNAUTHORIZED);
+        }
     }
 
 }

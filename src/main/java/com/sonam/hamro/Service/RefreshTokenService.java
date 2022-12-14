@@ -5,4 +5,7 @@ import com.sonam.hamro.models.User;
 
 public interface RefreshTokenService {
     RefreshToken generateRefreshToken(User user);
+
+
+    RefreshToken getRefreshTokenFromToken(String token);
 }
