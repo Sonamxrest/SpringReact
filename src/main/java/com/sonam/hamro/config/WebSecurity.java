@@ -12,6 +12,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -38,6 +39,7 @@ public class WebSecurity {
                     .anyRequest()
                     .permitAll()
                     .and()
+                    .addFilterBefore(new WebSecurityFilter(), UsernamePasswordAuthenticationFilter.class)
                     .build();
         } catch (Exception exception) {
             exception.printStackTrace();
@@ -48,7 +50,10 @@ public class WebSecurity {
 
     @Bean
     public AuthenticationManager authenticationManager(HttpSecurity httpSecurity) throws Exception {
-        return httpSecurity.getSharedObject(AuthenticationManagerBuilder.class).authenticationProvider(authenticationProvider()).build();
+        return httpSecurity
+                .getSharedObject(AuthenticationManagerBuilder.class)
+                .authenticationProvider(authenticationProvider())
+                .build();
     }
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {

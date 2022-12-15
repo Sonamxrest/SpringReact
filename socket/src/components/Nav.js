@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-const Dashboard = () => {
+const Nav = () => {
     return (
         <div>
             <meta charSet="utf-8" />
@@ -11,7 +11,7 @@ const Dashboard = () => {
             <link rel="stylesheet" type="text/css" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" />
             <nav className="main-menu">
                 <div>
-                    <a className="logo" href="#">
+                    <a className="logo" >
                     </a>
                 </div>
                 <div className="settings" />
@@ -24,23 +24,23 @@ const Dashboard = () => {
                             </Link>
                         </li>
                         <li>
-                            <a href="#">
+                            <a >
                                 <i className="fa fa-user fa-lg" />
                                 <span className="nav-text">Login</span>
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a >
                                 <i className="fa fa-envelope-o fa-lg" />
                                 <span className="nav-text">Contact</span>
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a >
                                 <i className="fa fa-heart-o fa-lg" />
                                 <span className="share">
-                                </span></a><div className="addthis_default_style addthis_32x32_style"><a href="#">
-                                </a><div style={{ position: 'absolute', marginLeft: '56px', top: '3px' }}><a href="#">
+                                </span></a><div className="addthis_default_style addthis_32x32_style"><a >
+                                </a><div style={{ position: 'absolute', marginLeft: '56px', top: '3px' }}><a >
                                 </a><a href="https://www.facebook.com" target="_blank" className="share-popup"><img src="http://icons.iconarchive.com/icons/danleech/simple/512/facebook-icon.png" width="30px" height="30px" /></a>
                                     <a href="https://twitter.com/share" target="_blank" className="share-popup"><img src="https://cdn1.iconfinder.com/data/icons/metro-ui-dock-icon-set--icons-by-dakirby/512/Twitter_alt.png" width="30px" height="30px" /></a>
                                     <a href="" target="_blank" className="share-popup"><img src="http://icons.iconarchive.com/icons/danleech/simple/512/google-plus-icon.png" width="30px" height="30px" /></a>
@@ -59,83 +59,83 @@ const Dashboard = () => {
                                 </span>
                             </div></li>
                         <li className="darkerlishadow">
-                            <a href="#">
+                            <a >
                                 <i className="fa fa-clock-o fa-lg" />
                                 <span className="nav-text">News</span>
                             </a>
                         </li>
                         <li className="darkerli">
-                            <a href="#">
+                            <a >
                                 <i className="fa fa-desktop fa-lg" />
                                 <span className="nav-text">Technology</span>
                             </a>
                         </li>
                         <li className="darkerli">
-                            <a href="#">
+                            <a >
                                 <i className="fa fa-plane fa-lg" />
                                 <span className="nav-text">Travel</span>
                             </a>
                         </li>
                         <li className="darkerli">
-                            <a href="#">
+                            <a >
                                 <i className="fa fa-shopping-cart" />
                                 <span className="nav-text">Shopping</span>
                             </a>
                         </li>
                         <li className="darkerli">
-                            <a href="#">
+                            <a >
                                 <i className="fa fa-microphone fa-lg" />
                                 <span className="nav-text">Film &amp; Music</span>
                             </a>
                         </li>
                         <li className="darkerli">
-                            <a href="#">
+                            <a >
                                 <i className="fa fa-flask fa-lg" />
                                 <span className="nav-text">Web Tools</span>
                             </a>
                         </li>
                         <li className="darkerli">
-                            <a href="#">
+                            <a >
                                 <i className="fa fa-picture-o fa-lg" />
                                 <span className="nav-text">Art &amp; Design</span>
                             </a>
                         </li>
                         <li className="darkerli">
-                            <a href="#">
+                            <a >
                                 <i className="fa fa-align-left fa-lg" />
                                 <span className="nav-text">Magazines
                                 </span>
                             </a>
                         </li>
                         <li className="darkerli">
-                            <a href="#">
+                            <a >
                                 <i className="fa fa-gamepad fa-lg" />
                                 <span className="nav-text">Games</span>
                             </a>
                         </li>
                         <li className="darkerli">
-                            <a href="#">
+                            <a >
                                 <i className="fa fa-glass fa-lg" />
                                 <span className="nav-text">Life &amp; Style
                                 </span>
                             </a>
                         </li>
                         <li className="darkerlishadowdown">
-                            <a href="#">
+                            <a >
                                 <i className="fa fa-rocket fa-lg" />
                                 <span className="nav-text">Fun</span>
                             </a>
                         </li>
                     </ul>
                     <li>
-                        <a href="#">
+                        <a >
                             <i className="fa fa-question-circle fa-lg" />
                             <span className="nav-text">Help</span>
                         </a>
                     </li>
                     <ul className="logout">
                         <li>
-                            <a href="#">
+                            <a >
                                 <i className="fa fa-lightbulb-o fa-lg" />
                                 <span className="nav-text">
                                     BLOG
@@ -148,4 +148,4 @@ const Dashboard = () => {
     )
 
 }
-export default Dashboard;
+export default Nav;

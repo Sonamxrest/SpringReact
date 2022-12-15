@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { toDO } from "../service/userService";
+import { toast } from "react-toastify";
+import { login } from "../service/userService";
 
 const Login = () => {
     const [input, setInput] = useState({});
@@ -9,12 +10,12 @@ const Login = () => {
         setInput((e) => ({ ...e, [event.target.name]: event.target.value }));
     }
     const onSubmit = () => {
-        toDO(input).then((res) => {
-            console.log('this is response', res);
-            localStorage.setItem('token', res.data.token);
+        login(input).then((res) => {
+            toast.success("Login Success")
+            localStorage.setItem('access_token', res.data.token);
             localStorage.setItem('id', res.data.id);
             localStorage.setItem('username', res.data.username);
-            window.location.href = "/home"
+            window.location.href = "/users"
         }).catch((err) => {
 
         })

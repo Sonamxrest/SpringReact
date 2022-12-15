@@ -6,6 +6,7 @@ import com.sonam.hamro.config.JWTUtils;
 import com.sonam.hamro.models.RefreshToken;
 import com.sonam.hamro.models.User;
 import com.sonam.hamro.persitDto.UserPersitDto;
+import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +14,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.Instant;
@@ -36,10 +38,15 @@ public class UserController {
     private RefreshTokenService refreshTokenService;
 
 
+    @SneakyThrows
     @PostMapping("/save")
     public ResponseEntity<?> save(@RequestBody UserPersitDto userPersitDto) {
         if (userPersitDto.getId() == null) {
             userPersitDto.setPassword(encoder.encode(userPersitDto.getPassword()));
+        }
+        User u = (User) userService.loadUserByUsername(userPersitDto.getUsername());
+        if (!ObjectUtils.isEmpty(u)) {
+            return new ResponseEntity("User Already Exist With The Username", HttpStatus.BAD_REQUEST);
         }
         userService.saveUser(userPersitDto);
         return new ResponseEntity(userPersitDto, HttpStatus.OK);

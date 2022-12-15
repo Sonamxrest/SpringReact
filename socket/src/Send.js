@@ -10,7 +10,7 @@ const Send = () => {
     const [send, setSend] = useState([]);
     const [message, setMessage] = useState('');
     const [group, setGroup] = useState({
-        "id": 1,
+        "id": 102,
         "uidOne": 52,
         "uidTwo": 102,
     });
