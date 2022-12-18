@@ -7,7 +7,6 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.NoResultException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.ObjectUtils;
 
 @Service
 public class GroupServiceImpl implements GroupService {
@@ -31,10 +30,10 @@ public class GroupServiceImpl implements GroupService {
                     .setParameter("id", id)
                     .getSingleResult();
         } catch (NoResultException noResultException) {
-                g = new Group();
-                g.setUidOne(uid);
-                g.setUidTwo(id);
-                g = groupService.save(g);
+            g = new Group();
+            g.setUidOne(uid);
+            g.setUidTwo(id);
+            g = groupService.save(g);
         }
         return g;
     }
