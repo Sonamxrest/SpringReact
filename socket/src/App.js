@@ -15,16 +15,13 @@ const App = () => {
       <BrowserRouter>
       <ToastContainer/>
         {localStorage.getItem('token') ? <Nav /> : <></>}
-      <body>
       <Routes>
           <Route path="recieve" element={<Recieve />} />
           <Route path="" element={<Login />} />
-          <Route path="send" element={<Send />} />
-          <Route path="register" element={<Register />} />
+          <Route path="chat/:id" element={<Send />} />
           <Route path="users" element={<UserList />} />
 
         </Routes>
-      </body>
       </BrowserRouter>
     </div>
   );

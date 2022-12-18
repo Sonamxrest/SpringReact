@@ -22,15 +22,18 @@ const UserList = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {data.map((d) => {
+                    {data.map(d => {
                         return (
-                            <tr key={d.id}>
-                                <td>{d.id}</td>
-                                <td>{d.first_name}</td>
-                                <td>{d.username}</td>
-                                <td><Link to="chat">Chat</Link></td>
-                            </tr>
+                            (d.id.toString() === localStorage.getItem('id') ? (<></>)
+                                :
+                                (<tr key={d.id}>
+                                    <td>{d.id}</td>
+                                    <td>{d.first_name}</td>
+                                    <td>{d.username}</td>
+                                    <td><Link to={"/chat/" + d.id} >Chat</Link></td>
+                                </tr>))
                         )
+
                     })}
                 </tbody>
             </table>

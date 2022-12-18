@@ -11,3 +11,8 @@ export const register = (user) => {
 export const getAllUser = () => {
   return axios.get(BASE_URL + '/v1/user/all');
 }
+
+
+export const getGroup = (uid , id) => {
+  return axios.get(BASE_URL + `/v1/message/get/group/${uid}/${id}`);
+}
