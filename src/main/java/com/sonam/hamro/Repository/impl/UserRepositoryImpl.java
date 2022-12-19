@@ -4,15 +4,15 @@ import com.sonam.hamro.Repository.UserRepository;
 import com.sonam.hamro.models.Group;
 import com.sonam.hamro.models.User;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.NoResultException;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Repository
+@Service
 @Transactional
 public class UserRepositoryImpl implements UserRepository {
 
@@ -21,13 +21,17 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public User findUserByUserName(String username) {
-        return (User) entityManager.createQuery("SELECT u from User u where username =:username")
-                .setParameter("username", username).getSingleResult();
+        try {
+            return (User) entityManager.createQuery("SELECT u from User u where username =:username")
+                    .setParameter("username", username).getSingleResult();
+        } catch (NoResultException noResultException) {
+            return null;
+        }
     }
 
     @Override
     public User findById(Long id) {
-        User use =  (User) entityManager.createQuery("SELECT u from User u where id = :id")
+        User use = (User) entityManager.createQuery("SELECT u from User u where id = :id")
                 .setParameter("id", id).getSingleResult();
         use.setGroups(this.getGroupOfUser(id));
         return use;

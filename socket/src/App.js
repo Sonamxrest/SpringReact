@@ -1,11 +1,10 @@
 import React from 'react';
 import Recieve from './Recieve';
 import Send from './Send';
-import { BrowserRouter, Routes, Route, Router } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from './components/Login';
-import Register from './components/Register';
 import Nav from './components/Nav';
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'
 import UserList from './components/UserList';
 import PrivateAuthRoute from './service/PrivateAuthRoute';

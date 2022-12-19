@@ -12,7 +12,8 @@ const Login = () => {
     const onSubmit = () => {
         login(input).then((res) => {
             toast.success("Login Success")
-            localStorage.setItem('access_token', res.data.token);
+            localStorage.setItem('token', res.data.access_token);
+            localStorage.setItem('refresh_token', res.data.refresh_token);
             localStorage.setItem('id', res.data.id);
             localStorage.setItem('username', res.data.username);
             window.location.href = "/users"

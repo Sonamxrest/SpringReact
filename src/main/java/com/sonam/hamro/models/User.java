@@ -1,9 +1,7 @@
 package com.sonam.hamro.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
-import jakarta.persistence.Transient;
+import jakarta.persistence.*;
 import jakarta.transaction.Transactional;
 import lombok.Getter;
 import lombok.Setter;
@@ -27,6 +25,9 @@ public class User extends BaseEntity<Long> implements UserDetails {
 
     @Transient
     private List<Group> groups;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private List<Posts> posts;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

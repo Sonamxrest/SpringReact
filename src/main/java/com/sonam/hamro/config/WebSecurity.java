@@ -39,7 +39,7 @@ public class WebSecurity {
                     .anyRequest()
                     .permitAll()
                     .and()
-                    .addFilterBefore(new WebSecurityFilter(), UsernamePasswordAuthenticationFilter.class)
+//                    .addFilterBefore(new WebSecurityFilter(), UsernamePasswordAuthenticationFilter.class)
                     .build();
         } catch (Exception exception) {
             exception.printStackTrace();

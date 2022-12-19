@@ -1,6 +1,7 @@
 package com.sonam.hamro.config;
 
 import com.sonam.hamro.Repository.UserRepository;
+import com.sonam.hamro.Service.UserService;
 import com.sonam.hamro.models.User;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -22,7 +23,7 @@ import java.util.ArrayList;
 @Configuration
 public class WebSecurityFilter extends GenericFilterBean {
     @Autowired
-    private UserRepository userRepository;
+    private UserService userRepository;
 
     @Autowired
     private AuthenticationManager authenticationManager;
@@ -35,7 +36,7 @@ public class WebSecurityFilter extends GenericFilterBean {
             String token = header.substring(7);
             String username = JWTUtils.decode(token);
             if (!ObjectUtils.isEmpty(username)) {
-                User user = userRepository.findUserByUserName(username);
+                User user = (User) userRepository.loadUserByUsername(username);
                 UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(user, user.getUsername(), new ArrayList<>());
                 Authentication authentication = authenticationManager.authenticate(usernamePasswordAuthenticationToken);
                 SecurityContextHolder.getContext().setAuthentication(authentication);
